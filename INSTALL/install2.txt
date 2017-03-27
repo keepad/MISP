@@ -4,7 +4,7 @@ sudo -u www-data sh -c "mysql -u misp -p misp < /var/www/MISP/INSTALL/MYSQL.sql"
 sudo cp /var/www/MISP/INSTALL/apache.misp.ssl /etc/apache2/sites-available/misp-ssl.conf
 
 sudo openssl req -newkey rsa:4096 -days 365 -nodes -x509 \
--subj "/C=USA/ST=CA/L=Redwood/O=Q/OU=Q" \
+-subj "/C=USA/ST=CA/L=Redwood/O=q/OU=q/CN=q.com" \
 -keyout /etc/ssl/private/misp.local.key -out /etc/ssl/private/misp.local.crt
 
 
