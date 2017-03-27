@@ -1,0 +1,24 @@
+
+sudo -u www-data sh -c "mysql -u misp -p misp < /var/www/MISP/INSTALL/MYSQL.sql"
+
+sudo cp /var/www/MISP/INSTALL/apache.misp.ssl /etc/apache2/sites-available/misp-ssl.conf
+
+sudo openssl req -newkey rsa:4096 -days 365 -nodes -x509 \
+-subj "/C=USA/ST=CA/L=Redwood/O=Q/OU=Q" \
+-keyout /etc/ssl/private/misp.local.key -out /etc/ssl/private/misp.local.crt
+
+
+sudo a2dissite default-ssl
+sudo a2ensite misp-ssl
+
+sudo systemctl restart apache2
+
+sudo cp INSTALL/misp.logrotate /etc/logrotate.d/misp
+
+sudo cp INSTALL/misp.logrotate /etc/logrotate.d/misp
+
+sudo -u www-data cp -a /var/www/MISP/app/Config/bootstrap.default.php /var/www/MISP/app/Config/bootstrap.php
+sudo -u www-data cp -a /var/www/MISP/app/Config/database.default.php /var/www/MISP/app/Config/database.php
+sudo -u www-data cp -a /var/www/MISP/app/Config/core.default.php /var/www/MISP/app/Config/core.php
+sudo -u www-data cp -a /var/www/MISP/app/Config/config.default.php /var/www/MISP/app/Config/config.php
+
